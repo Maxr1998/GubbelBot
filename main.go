@@ -25,8 +25,11 @@ const (
 )
 
 var (
-	normalReplacer   = strings.NewReplacer("B", b, "b", b, "P", b, "p", b)
-	advancedReplacer = strings.NewReplacer("B", b, "b", b, "P", b, "p", b, "G", b, "g", b, "N", b, "n", b, "M", b, "m", b, "D", b, "d", b)
+	normalReplacements   = []rune{'b', 'p'}
+	advancedReplacements = []rune{'b', 'p', 'g', 'n', 'm', 'd'}
+
+	normalReplacer   = getReplacer(normalReplacements)
+	advancedReplacer = getReplacer(advancedReplacements)
 	bReplacer        = func(s string) string {
 		runes := []rune(s)
 		for i, r := range runes {
@@ -37,6 +40,16 @@ var (
 		return string(runes)
 	}
 )
+
+func getReplacer(replacements []rune) *strings.Replacer {
+	params := make([]string, 0, len(replacements)*4)
+
+	for _, replace := range replacements {
+		params = append(params, string(replace), b, strings.ToUpper(string(replace)), b)
+	}
+
+	return strings.NewReplacer(params...)
+}
 
 func main() {
 	// Register API
