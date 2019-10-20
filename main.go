@@ -26,7 +26,7 @@ const (
 
 var (
 	normalReplacer   = strings.NewReplacer("B", b, "b", b, "P", b, "p", b)
-	advancedReplacer = strings.NewReplacer("B", b, "b", b, "P", b, "p", b, "G", b, "g", b, "N", b, "n", b, "D", b, "d", b)
+	advancedReplacer = strings.NewReplacer("B", b, "b", b, "P", b, "p", b, "G", b, "g", b, "N", b, "n", b, "M", b, "m", b, "D", b, "d", b)
 	bReplacer        = func(s string) string {
 		runes := []rune(s)
 		for i, r := range runes {
